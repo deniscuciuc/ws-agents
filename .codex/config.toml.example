@@ -1,0 +1,23 @@
+# Codex MCP Configuration Example
+# Copy to ~/.codex/config.toml and customise
+
+[mcp]
+# GitHub CLI MCP server
+[mcp.servers.github]
+command = "gh"
+args = ["mcp", "--stdio"]
+
+# Filesystem access (restrict paths to your projects)
+[mcp.servers.filesystem]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-filesystem", "/home/YOUR_USER/projects"]
+
+# Browser automation via Playwright
+# [mcp.servers.playwright]
+# command = "npx"
+# args = ["-y", "@playwright/mcp", "--headless"]
+
+# Context7 documentation search
+# [mcp.servers.context7]
+# command = "npx"
+# args = ["-y", "@context7/mcp-server"]
