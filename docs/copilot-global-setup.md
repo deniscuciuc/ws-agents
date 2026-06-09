@@ -29,13 +29,13 @@ Or add to `settings.json`:
 {
   "github.copilot.chat.codeGeneration.instructions": [
     {
-      "file": "/home/denis/.config/copilot/instructions.md"
+      "file": "$HOME/.config/copilot/instructions.md"
     }
   ]
 }
 ```
 
-> **Note:** Use the absolute path.
+> **Note:** Use the absolute path, replacing `$HOME` with your home directory.
 
 ### Step 2 — Verify
 
