@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  shell-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check shell syntax
+        run: |
+          for f in scripts/*.sh; do
+            echo "Checking $f..."
+            sh -n "$f"
+          done
+        shell: bash
+
+  markdown-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Markdown files exist and have headers
+        run: |
+          errors=0
+          for f in shared/personas/*.md shared/workflows/*.md templates/*.md docs/*.md; do
+            [ -f "$f" ] || continue
+            if ! head -1 "$f" | grep -q "^#"; then
+              echo "FAIL: Missing title in $f"
+              errors=$((errors + 1))
+            fi
+          done
+          for f in .claude/agents/*.md .github/agents/*.agent.md; do
+            [ -f "$f" ] || continue
+            if ! head -1 "$f" | grep -q "^---"; then
+              echo "FAIL: Missing frontmatter in $f"
+              errors=$((errors + 1))
+            fi
+          done
+          exit $errors
+        shell: bash
+
+  build-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run build
+        run: ./scripts/build.sh
+        shell: bash
+      - name: Run static verification
+        run: ./scripts/verify.sh --static
+        shell: bash
