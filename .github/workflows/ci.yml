@@ -10,7 +10,7 @@ jobs:
   shell-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Check shell syntax
         run: |
           for f in scripts/*.sh; do
@@ -22,7 +22,7 @@ jobs:
   markdown-validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Check Markdown files exist and have headers
         run: |
           errors=0
@@ -46,7 +46,7 @@ jobs:
   build-and-verify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Run build
         run: ./scripts/build.sh
         shell: bash
