@@ -89,7 +89,7 @@ This repo includes pre-built Copilot custom agents in `.github/agents/`:
 | `frontend-reviewer.agent.md` | React/TypeScript code reviewer |
 | `release-notes-writer.agent.md` | Structured release notes generator |
 
-These are recognised by VS Code when placed in `.github/agents/` within a repo.
+These are recognised by VS Code when placed in `.github/agents/` within a repo, or globally in `~/.copilot/agents/`. The `apply-global.sh` installer symlinks them to `~/.copilot/agents/` automatically, making all custom agents available in every repository.
 
 ---
 

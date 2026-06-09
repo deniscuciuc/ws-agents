@@ -156,6 +156,15 @@ if [ "$ENABLE_COPILOT" = true ]; then
     safe_install "$tmpf" "${HOME}/.config/copilot/instructions.md"
     [ "$DRY_RUN" = false ] && rm -f "$tmpf"
   fi
+
+  # Custom agents (user-level: ~/.copilot/agents/)
+  if [ -d "${REPO_ROOT}/.github/agents" ]; then
+    mkdir -p "${HOME}/.copilot/agents" 2>/dev/null || true
+    for f in "${REPO_ROOT}/.github/agents"/*.agent.md; do
+      [ -f "$f" ] || continue
+      safe_install "$f" "${HOME}/.copilot/agents/$(basename "$f")"
+    done
+  fi
   echo ""
 fi
 

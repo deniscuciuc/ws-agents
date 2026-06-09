@@ -29,7 +29,7 @@ echo ""
 # --- Active symlinks ---
 echo "## Active Symlinks"
 found=0
-for dir in "${HOME}/.codex" "${HOME}/.copilot" "${HOME}/.claude" "${HOME}/.agents" "${HOME}/.config/copilot"; do
+for dir in "${HOME}/.codex" "${HOME}/.copilot" "${HOME}/.claude" "${HOME}/.agents" "${HOME}/.copilot/agents" "${HOME}/.config/copilot"; do
   [ -L "$dir" ] && echo "  [LINK] ${dir} -> $(readlink "$dir")" && found=$((found + 1))
   [ -f "$dir" ] && echo "  [FILE] ${dir}" && found=$((found + 1))
   [ -d "$dir" ] && ! [ -L "$dir" ] && echo "  [DIR]  ${dir}" && found=$((found + 1))
