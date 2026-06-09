@@ -28,7 +28,9 @@ jobs:
           errors=0
           for f in shared/personas/*.md shared/workflows/*.md templates/*.md docs/*.md; do
             [ -f "$f" ] || continue
-            if ! head -1 "$f" | grep -q "^#"; then
+            # Skip YAML frontmatter (--- blocks) and check first content line for a title
+            title=$(awk '/^---$/{s++; next} (s==0||s>=2)&&/^#/{print; exit}' "$f")
+            if [ -z "$title" ]; then
               echo "FAIL: Missing title in $f"
               errors=$((errors + 1))
             fi
